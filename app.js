@@ -1,23 +1,23 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+const app = express();
+
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
+app.use(cors());
 
 const config = require('./config');
 
 const db = require('knex')({
   client: 'pg',
   connection: {
-    host : config.db.host,
-    user : config.db.user,
-    password : config.db.password,
-  },
+    host: config.db.host,
+    user: config.db.user,
+    password: config.db.password,
+    database: config.db.database,
+  }
 });
-
-const app = express();
-
-app.use(bodyParser.urlencoded({ extended: false }));
-app.use(bodyParser.json());
-app.use(cors());
 
 app.route('/api/users').post(async (req, res, next) => {
   try {
