@@ -19,6 +19,7 @@ const db = require('knex')({
   }
 });
 
+
 app.route('/api/users').post(async (req, res, next) => {
   try {
     const { email, firstname } = req.body;
@@ -27,6 +28,7 @@ app.route('/api/users').post(async (req, res, next) => {
 
     const result = await db('users').returning('id').insert(userData);
     const id = result[0];
+
     res.status(201).send({ id, ...userData });
   } catch (err) {
     console.log(`Error: Unable to create user: ${err.message}. ${err.stack}`);
