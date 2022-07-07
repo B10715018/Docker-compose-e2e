@@ -11,8 +11,6 @@ const TEST_USER = {
   firstname: "John"
 };
 
-let createdUserId;
-
 describe("Users", () => {
   it("should create a new user", done => {
     chai
